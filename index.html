@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o Meu Amor 🎄❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #0b1d3a, #1a0b2e);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; /* Esconde a barra de scroll inicialmente */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Neve a cair */
+        .snowflakes {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1.2em;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) translateX(20px) rotate(360deg); opacity: 0; }
+        }
+
+        .fase {
+            display: none;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .fase.ativa { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FASE 1: A CARTA */
+        .envelope-container {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .envelope-container:hover { transform: scale(1.05) rotate(2deg); }
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #d42426;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            border-top: 100px solid #ff3333;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            z-index: 3;
+            transform-origin: top;
+            transition: transform 1s;
+        }
+        .envelope.aberto::before { transform: rotateX(180deg); z-index: 1; }
+        .selo {
+            position: absolute;
+            top: 80px; left: 50%; transform: translateX(-50%);
+            font-size: 40px; z-index: 4; transition: opacity 0.5s;
+        }
+        .envelope.aberto .selo { opacity: 0; }
+        .carta-papel {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            background: #fff8e7;
+            color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            z-index: 2;
+            transform: translateY(0);
+            transition: transform 1.5s, height 1.5s;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .envelope.aberto .carta-papel {
+            transform: translateY(-150px) scale(1.2);
+            z-index: 5;
+            height: auto;
+            min-height: 250px;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: #2ea143;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(46, 161, 67, 0.4);
+            transition: all 0.3s;
+            z-index: 20;
+        }
+        button:hover { background: #248235; transform: scale(1.05); }
+
+        /* FASE 2: IDEIAS DE NATAL */
+        .ideias-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #2ea143;
+            max-width: 600px;
+        }
+        .ideias-container h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4d4d;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .ideia {
+            font-size: 20px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* FASE 3: O BEIJO */
+        .cenario-beijo {
+            position: relative;
+            width: 100vw;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .rosto {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            position: absolute;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: all 5s ease-in-out;
+            /* Animação de mexer para os lados suavemente */
+            animation: balancar 3s infinite alternate ease-in-out;
+        }
+        .rosto-ele { left: 10%; }
+        .rosto-ela { right: 10%; }
+
+        @keyframes balancar {
+            0% { transform: translateY(0px) rotate(-5deg); }
+            100% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Classes adicionadas pelo JS para juntar os rostos */
+        .beijar-ele { left: 50%; transform: translateX(-95%) !important; animation: none; }
+        .beijar-ela { right: 50%; transform: translateX(95%) !important; animation: none; }
+
+        .coracao-beijo {
+            position: absolute;
+            top: 40%;
+            font-size: 80px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+            filter: drop-shadow(0 0 20px red);
+        }
+
+        .coracao-mostrar {
+            opacity: 1 !important;
+            transform: scale(1) translateY(-80px) !important;
+            animation: palpitar 1s infinite alternate;
+        }
+
+        /* FASE 4: FOTO FINAL */
+        .moldura-final {
+            background: linear-gradient(45deg, #d42426, #2ea143);
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+        .foto-familia {
+            width: 80vw;
+            max-width: 600px;
+            border-radius: 15px;
+            border: 3px solid white;
+        }
+        .mensagem-final {
+            font-family: 'Dancing Script', cursive;
+            font-size: 35px;
+            margin-top: 20px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Música de Fundo -->
+    <audio id="musicaFundo" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Fundo de Neve -->
+    <div class="snowflakes" id="snowflakes"></div>
+
+    <!-- FASE 1: A CARTA -->
+    <div id="fase1" class="fase ativa">
+        <h2 style="font-family: 'Dancing Script'; font-size: 35px; margin-bottom: 40px; color: #ffd700;">Tem algo para ti aqui... Clica!</h2>
+        
+        <div class="envelope-container" onclick="abrirCarta()">
+            <div class="envelope" id="envelope">
+                <div class="selo" id="selo">❤️</div>
+                <div class="carta-papel" id="carta">
+                    Meu amor,<br><br>
+                    Desculpa por qualquer momento em que falhei. Quero que saibas que tudo vai ficar bem, porque o nosso amor é a coisa mais forte que existe.<br><br>
+                    Amo-te mais do que as palavras conseguem explicar. ❤️
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-fase2" style="display: none; margin-top: 150px;" onclick="irParaFase2()">Continuar Surpresa 🎄</button>
+    </div>
+
+    <!-- FASE 2: IDEIAS DE NATAL -->
+    <div id="fase2" class="fase">
+        <div class="ideias-container">
+            <h1>Para o Nosso Natal Mágico...</h1>
+            <p>Prometo-te que este Natal vai ser inesquecível. Aqui estão algumas coisas que vamos fazer juntos:</p>
+            
+            <div class="ideia">☕ Beber chocolate quente na cama</div>
+            <div class="ideia">🎬 Maratona de filmes de Natal bem agarradinhos</div>
+            <div class="ideia">🍪 Fazer biscoitos (e sujar a cozinha toda)</div>
+            <div class="ideia">✨ Passear de mão dada para ver as luzes de Natal</div>
+            
+            <button onclick="irParaFase3()">E a melhor parte de todas...</button>
+        </div>
+    </div>
+
+    <!-- FASE 3: O BEIJO -->
+    <div id="fase3" class="fase">
+        <h1 style="font-family: 'Dancing Script'; font-size: 40px; color: #ffb3b3;">...é estar nos teus braços.</h1>
+        <div class="cenario-beijo">
+            <img src="ele.jpg" alt="Ele" class="rosto rosto-ele" id="rostoEle">
+            <div class="coracao-beijo" id="coracaoBeijo">❤️</div>
+            <img src="ela.jpg" alt="Ela" class="rosto rosto-ela" id="rostoEla">
+        </div>
+    </div>
+
+    <!-- FASE 4: FOTO FINAL -->
+    <div id="fase4" class="fase">
+        <div class="moldura-final">
+            <!-- Usa o criador de imagens IA e guarda a foto com o nome "foto_final.jpg" -->
+            <img src="foto_final.jpg" alt="A nossa família no Natal" class="foto-familia">
+        </div>
+        <div class="mensagem-final">
+            A nossa família imperfeita, mas perfeita para mim.<br>Feliz Natal, Meu Amor! 🎄🐈🐈❤️
+        </div>
+    </div>
+
+    <script>
+        // 1. Criar a Neve
+        const snowContainer = document.getElementById('snowflakes');
+        const flocos = ['❅', '❆', '❄', '✧'];
+        for (let i = 0; i < 50; i++) {
+            let snow = document.createElement('div');
+            snow.className = 'snowflake';
+            snow.innerHTML = flocos[Math.floor(Math.random() * flocos.length)];
+            snow.style.left = Math.random() * 100 + 'vw';
+            snow.style.animationDuration = (Math.random() * 5 + 5) + 's'; // cai entre 5s a 10s
+            snow.style.opacity = Math.random();
+            snow.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
+            snowContainer.appendChild(snow);
+        }
+
+        // Lógica das Fases
+        function abrirCarta() {
+            // Inicia a música
+            document.getElementById('musicaFundo').play().catch(()=>console.log("Música precisa de interação extra."));
+            
+            // Abre envelope
+            document.getElementById('envelope').classList.add('aberto');
+            
+            // Mostra botão de continuar após ler a carta
+            setTimeout(() => {
+                document.getElementById('btn-fase2').style.display = 'block';
+            }, 2000);
+        }
+
+        function mudarFase(esconderId, mostrarId) {
+            document.getElementById(esconderId).classList.remove('ativa');
+            document.getElementById(mostrarId).classList.add('ativa');
+        }
+
+        function irParaFase2() {
+            mudarFase('fase1', 'fase2');
+        }
+
+        function irParaFase3() {
+            mudarFase('fase2', 'fase3');
+            iniciarBeijo();
+        }
+
+        function iniciarBeijo() {
+            // Aguarda 1 segundo para a fase carregar e começa a juntar as caras
+            setTimeout(() => {
+                document.getElementById('rostoEle').classList.add('beijar-ele');
+                document.getElementById('rostoEla').classList.add('beijar-ela');
+            }, 1000);
+
+            // Quando as caras se juntam (a transição dura 5s) o coração aparece!
+            setTimeout(() => {
+                document.getElementById('coracaoBeijo').classList.add('coracao-mostrar');
+            }, 5500);
+
+            // Após o beijo, avança automaticamente para a foto final da árvore
+            setTimeout(() => {
+                mudarFase('fase3', 'fase4');
+            }, 9000); // 9 segundos depois
+        }
+    </script>
+
+</body>
+</html>
