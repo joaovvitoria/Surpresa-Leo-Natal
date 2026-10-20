@@ -111,8 +111,9 @@
         .envelope.aberto .carta-papel {
             transform: translateY(-150px) scale(1.2);
             z-index: 5;
-            height: auto;
-            min-height: 250px;
+            height: max-content; /* Faz a folha crescer com o texto */
+            bottom: auto; /* Solta a folha do fundo do envelope */
+            padding-bottom: 25px; /* Dá uma margem bonita no final */
         }
 
         button {
